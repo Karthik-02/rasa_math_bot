@@ -1,0 +1,90 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - math_operations
+  - more_operations
+  - inform
+
+entities:
+  - first_number
+  - second_number
+  - operation
+
+slots:
+  operation:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: operation
+  first_number:
+    type: float
+    mappings:
+    - type: from_entity
+      entity: first_number
+  second_number:
+    type: float
+    mappings:
+    - type: from_entity
+      entity: second_number
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?I can help you perform basic mathematical operations. What would you like me to do?"
+  
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_thank:
+  - text: "Thank You!"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_ask_operation:
+  - text: "What type of mathematical operation do you want to perform?"
+
+  utter_ask_first_number:
+  - text: "What is the first number?"
+
+  utter_ask_second_number:
+  - text: "What is the second number?"
+
+  utter_divide_by_zero_error:
+  - text: "The second number cannot be 0. Please enter a valid number."
+
+actions:
+  - utter_greet
+  - utter_cheer_up
+  - utter_did_that_help
+  - utter_happy
+  - utter_thank
+  - utter_goodbye
+  - utter_iamabot
+  - utter_ask_operation
+  - utter_ask_first_number
+  - utter_ask_second_number
+  - utter_divide_by_zero_error
+  - action_math_operations
+  - action_more_operations
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,61 @@
+version: "3.1"
+
+stories:
+- story: User greets the bot
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: User challenges the bot
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- story: User says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: User wants to perform a math operation
+  steps:
+  - intent: math_operations
+  - action: utter_ask_operation
+  - intent: inform
+    entities:
+    - operation: "addition"
+  - action: utter_ask_first_number
+  - action: utter_ask_second_number
+  - intent: inform
+    entities:
+    - first_number: 2.5
+    - second_number: 3.7
+  - action: action_math_operations
+  - action: utter_thank
+
+- story: User wants to divide by zero
+  steps:
+  - intent: math_operations
+  - action: utter_ask_operation
+  - intent: inform
+    entities:
+    - operation: "divide"
+  - action: utter_ask_first_number
+  - action: utter_ask_second_number
+  - intent: inform
+    entities:
+    - first_number: 5
+    - second_number: 0
+  - action: action_math_operations
+  - action: utter_divide_by_zero_error
+
+- story: Confirm user
+  steps:
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: action_restart
+
+- story: Deny confirmation
+  steps:
+  - action: utter_did_that_help
+  - intent: deny
+  - action: action_restart

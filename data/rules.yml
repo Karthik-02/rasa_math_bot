@@ -1,0 +1,62 @@
+version: "3.1"
+
+rules:
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Respond to greet intent
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Respond to goodbye intent
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Respond to affirm intent
+  steps:
+  - intent: affirm
+  - action: action_restart
+
+- rule: Respond to deny intent
+  steps:
+  - intent: deny
+  - action: action_restart
+
+- rule: Perform math operation
+  steps:
+  - intent: math_operations
+  - action: utter_ask_operation
+  - slot_was_set:
+    - operation: "math_operations"
+  wait_for_user_input: false
+
+- rule: Get user input
+  steps:
+  - action: utter_ask_first_number
+  - action: utter_ask_second_number
+  - slot_was_set:
+    - first_number: "first_number"
+    - second_number: "second_number"
+  wait_for_user_input: false
+  
+- rule: more operations
+  steps:
+  - action: action_math_operations
+  wait_for_user_input: false
+
+- rule: Handle division by zero error
+  condition:
+  - slot_was_set:
+    - operation: "divide"
+    - second_number: 0
+  steps:
+  - action: utter_divide_by_zero_error
