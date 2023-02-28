@@ -36,7 +36,7 @@ rasa shell or rasa run
 # Train the model :
 Your Rasa model is trained and saved at 'models\20230228-130421-immense-radon.tar.gz'.
 
-# Run your rasa model(rasa run):
+# Run your rasa model(rasa run output in shell):
 
 Bot loaded. Type a message and press enter (use '/stop' to exit):
 Your input ->  hi                                      
